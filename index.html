@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSRTC Conductor Prep 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Hind+Vadodara:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="top-navbar">
+        <button class="menu-trigger" onclick="toggleSidebar()">☰</button>
+        <span>શ્રી સરસ્વતી કરિયર એકેડમી</span>
+    </div>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+        <div class="sidebar-brand">શ્રી સરસ્વતી કરિયર એકેડમી</div>
+
+        <div id="profile-area" class="profile-section"></div>
+
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active-menu" onclick="changeScreenFromSidebar('screen-subjects')">🏠 Home Dashboard</li>
+            <li class="sidebar-item" onclick="alert('તમારો કુલ સ્કોર પ્રોફાઇલ સેક્શનમાં જોઈ શકાય છે.')">📊 My Progress Report</li>
+            <li class="sidebar-item" onclick="alert('WhatsApp Help Support: 9999999999')">💬 Contact Support Help</li>
+        </ul>
+    </div>
+
+    <!-- SCREEN 1: SUBJECTS -->
+    <div id="screen-subjects" class="screen active">
+
+        <div class="subject-header-card">
+            <div class="subject-header-left">
+                <h1>વિષય વાઇઝ ટેસ્ટ સિરીઝ</h1>
+                <div class="subject-title-line"></div>
+                <p>તમારો વિષય પસંદ કરો અને<br>તૈયારીની શરૂઆત કરો.</p>
+            </div>
+            <div class="subject-header-right">
+                <img src="assets/icon/book.webp" alt="Study Books" class="subject-header-img">
+            </div>
+        </div>
+
+        <div class="grid" id="subjects-container"></div>
+    </div>
+
+    <!-- SCREEN 2: BRANCHES (CHAPTERS) -->
+    <div id="screen-branches" class="screen">
+        <button class="back-btn-chip" onclick="window.history.back()"><span class="back-arrow">←</span> Back</button>
+
+        <div class="branch-header-card">
+            <div class="header-main-info">
+                <div class="header-icon-box">📖</div>
+                <div class="header-text-box">
+                    <h1 id="current-subject-title-branch">વિષયનું નામ</h1>
+                    <p>તમારો ચેપ્ટર પસંદ કરો</p>
+                </div>
+            </div>
+
+            <div class="header-stats-row">
+                <div class="stat-item">
+                    <span class="stat-icon blue-bg">📄</span>
+                    <div class="stat-details">
+                        <span class="stat-label">કુલ ચેપ્ટર</span>
+                        <span class="stat-value" id="stat-total-chapters">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-icon green-bg">✓</span>
+                    <div class="stat-details">
+                        <span class="stat-label">પૂર્ણ થયેલ</span>
+                        <span class="stat-value" id="stat-completed-chapters">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-icon orange-bg">↗</span>
+                    <div class="stat-details">
+                        <span class="stat-label">તમારી પ્રગતિ</span>
+                        <span class="stat-value" id="stat-progress-perc">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid" id="branches-container"></div>
+    </div>
+
+    <!-- SCREEN 3: TYPE SELECT -->
+    <div id="screen-type-select" class="screen">
+        <button class="back-btn-chip" onclick="window.history.back()"><span class="back-arrow">←</span> Back</button>
+
+        <div class="branch-header-card">
+            <div class="header-main-info" style="margin-bottom:0;">
+                <div class="header-icon-box">🎯</div>
+                <div class="header-text-box">
+                    <h1 id="current-subject-name">વિષયનું નામ</h1>
+                    <p>તમારો ટેસ્ટ પ્રકાર પસંદ કરો</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="type-cards-grid">
+            <div class="type-card" onclick="goToQuizList('Quiz')">
+                <div class="type-card-left">
+                    <div class="type-icon-box quiz-bg">⚡</div>
+                    <div class="type-info">
+                        <div class="type-title">QUIZ</div>
+                        <div class="type-subtext">ચેપ્ટર વાઇઝ ટૂંકી ક્વિઝ પ્રેક્ટિસ</div>
+                    </div>
+                </div>
+                <div class="type-card-right">
+                    <div class="ring" id="quiz-type-ring" style="--pct:0;"><div class="ring-inner" id="quiz-type-perc">0%</div></div>
+                </div>
+            </div>
+
+            <div class="type-card" onclick="goToQuizList('Mock Test')">
+                <div class="type-card-left">
+                    <div class="type-icon-box mock-bg">🏆</div>
+                    <div class="type-info">
+                        <div class="type-title">MOCK TEST</div>
+                        <div class="type-subtext">પૂરા સિલેબસની સમયબદ્ધ પરીક્ષા</div>
+                    </div>
+                </div>
+                <div class="type-card-right">
+                    <div class="ring" id="mock-type-ring" style="--pct:0;"><div class="ring-inner" id="mock-type-perc">0%</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: QUIZ LIST -->
+    <div id="screen-quiz-list" class="screen">
+        <button class="back-btn-chip" onclick="window.history.back()"><span class="back-arrow">←</span> Back</button>
+
+        <!-- Compact header with the same stat-row pattern used on Screen 2, now driven by real test counts -->
+        <div class="branch-header-card compact-header">
+            <div class="header-main-info">
+                <div class="header-icon-box">📝</div>
+                <div class="header-text-box">
+                    <h1 id="current-list-title">ટેસ્ટ લિસ્ટ</h1>
+                    <p>પ્રેક્ટિસ શરૂ કરવા માટે ટેસ્ટ પસંદ કરો</p>
+                </div>
+            </div>
+
+            <div class="header-stats-row">
+                <div class="stat-item">
+                    <span class="stat-icon blue-bg">📄</span>
+                    <div class="stat-details">
+                        <span class="stat-label">કુલ ટેસ્ટ</span>
+                        <span class="stat-value" id="stat-total-tests">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-icon green-bg">✓</span>
+                    <div class="stat-details">
+                        <span class="stat-label">પૂર્ણ થયેલ</span>
+                        <span class="stat-value" id="stat-completed-tests">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-icon orange-bg">↗</span>
+                    <div class="stat-details">
+                        <span class="stat-label">તમારી પ્રગતિ</span>
+                        <span class="stat-value" id="stat-list-progress-perc">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="dynamic-list-container" class="quiz-list-container"></div>
+    </div>
+
+    <!-- PAYWALL MODAL -->
+    <div id="paywall-modal" class="modal">
+        <div class="modal-content">
+            <h3>🔒 પ્રીમિયમ પ્લાન</h3>
+            <p>ટેસ્ટ 4 થી આગળના બધા ક્વિઝ અને મોક ટેસ્ટ આ પ્લાનથી ખૂલે છે.</p>
+            <h2 id="paywall-price" style="color:var(--gold); margin: 15px 0;">₹149</h2>
+            <button class="btn" style="width: 100%; margin-bottom: 0.7rem;" onclick="startRazorpayPayment()">🔒 Buy Now</button>
+            <button class="back-btn" onclick="closePaywall()">બંધ કરો</button>
+        </div>
+    </div>
+
+    <!-- LOGIN PROMPT MODAL — the ONLY thing that may call loginWithGoogle() is the
+         button click below, so the Google popup always fires from a fresh, direct
+         user gesture (never after an alert()/dialog, which browsers can treat as
+         gesture-expired and silently block the popup). -->
+    <div id="login-prompt-modal" class="modal">
+        <div class="modal-content">
+            <h3>🔒 લોગિન જરૂરી</h3>
+            <p>આગળના પ્રીમિયમ ટેસ્ટ માટે કૃપા કરીને પહેલા Google વડે લોગિન કરો.</p>
+            <button class="btn" style="width: 100%; margin: 15px 0 0.7rem;" onclick="closeLoginPrompt(); loginWithGoogle();">🔵 Login with Google</button>
+            <button class="back-btn" onclick="closeLoginPrompt()">બંધ કરો</button>
+        </div>
+    </div>
+
+    <!-- LOGOUT CONFIRM MODAL -->
+    <div id="logout-confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3>🚪 લોગ આઉટ</h3>
+            <p>શું તમે ખરેખર લોગ આઉટ કરવા માંગો છો?</p>
+            <button class="btn" style="width: 100%; margin: 15px 0 0.7rem; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 6px 16px rgba(185,28,28,0.28);" onclick="confirmLogout()">હા, લોગ આઉટ કરો</button>
+            <button class="back-btn" onclick="closeLogoutConfirm()">રદ કરો</button>
+        </div>
+    </div>
+
+<!-- 🔐 Supabase (real Google Sign-In + database) — config lives in js/supabase-config.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+
+<!-- 💳 Razorpay (real payment) — config lives in js/razorpay-config.js -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/razorpay-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
