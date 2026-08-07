@@ -34,8 +34,8 @@
 //      create the premium_status table + its security rules.
 // ============================================================
 
-const SUPABASE_URL = "https://ecepscqmxqnepoufqivm.supabase.co"; // e.g. "https://abcxyz.supabase.co"
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZXBzY3FteHFuZXBvdWZxaXZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU3NDA4MDQsImV4cCI6MjEwMTMxNjgwNH0.leiMirwD16GYvHav8gLs24M5HWCqVI2XI8DZOdGDmEI";
+const SUPABASE_URL = "https://vuptpngnvhgisnkzeyog.supabase.co"; // e.g. "https://abcxyz.supabase.co"
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1cHRwbmdudmhnaXNua3pleW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwODc0ODMsImV4cCI6MjEwMTY2MzQ4M30.2hpE95WJyjZxizH4ujZ4Yex1PPRb2S9RcmCpEY2F6g0";
 
 function buildSupabaseClient() {
     if (SUPABASE_URL.startsWith("PASTE_") || SUPABASE_ANON_KEY.startsWith("PASTE_")) {
